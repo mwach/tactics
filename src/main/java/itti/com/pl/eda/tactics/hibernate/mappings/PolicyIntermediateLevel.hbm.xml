@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="eu.netqos.pold.data.model" default-lazy="false">
+  <class name="PolicyIntermediateLevel" table="policies_il">
+    <id name="id" column="id">
+      <generator class="increment"/>
+    </id>
+    <many-to-one name="parent" column="hl_ref" class="PolicyHighLevel" not-null="true" />
+
+ 	<many-to-one outer-join="false" cascade="all" lazy="false" name="conditions" column="_condition" class="eu.netqos.pold.policy.PolicyTriple"></many-to-one>
+ 	<many-to-one outer-join="false" cascade="all" lazy="false" name="actions" column="action" class="eu.netqos.pold.policy.PolicyTriple"></many-to-one>
+	<many-to-one outer-join="false" cascade="all" lazy="false" name="timeConditions" column="time_condition" class="eu.netqos.pold.policy.TimeCondition" />
+
+    <property name="weight" column="weight" type="integer"></property>
+   	<property name="active" column="active" type="eu.netqos.pold.hibernate.helpers.BooleanUserType"></property>
+
+	<many-to-one name="qosLevel" column="qos_level" class="QoSLevel" lazy="false" index="policy_id" insert="true" cascade="all"/>
+
+	<many-to-one name="author" column="author_id" class="User" not-null="true" />
+	<property name="ipAddress" column="ip_address" type="string"></property>
+	<property name="application" column="application" type="string"></property>
+
+    <property name="type" column="type" type="string"></property>
+  </class>
+</hibernate-mapping>

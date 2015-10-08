@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="eu.netqos.pold.data.model" default-lazy="false">
+  <class name="Ontology" table="ontologies">
+    <id name="id" column="id">
+      <generator class="native"/>
+    </id>
+    <property name="ontologyName" column="ontology_name" type="string"></property>
+    <property name="ontologyLocation" column="ontology_location" type="string"></property>
+    <property name="qosOntology" column="ontology_qos" type="int"></property>
+    <property name="default" column="default" type="eu.netqos.pold.hibernate.helpers.BooleanUserType"></property>
+  </class>
+</hibernate-mapping>

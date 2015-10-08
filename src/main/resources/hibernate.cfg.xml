@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+      <property name="connection.url">jdbc:mysql://localhost/pold_dev</property>
+      <property name="connection.username">pold_user</property>
+      <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+      <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+      <property name="connection.password">password</property>
+    <property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+    <!--  thread is the short name for
+      org.hibernate.context.ThreadLocalSessionContext
+      and let Hibernate bind the session automatically to the thread
+    -->
+    <property name="current_session_context_class">thread</property>
+    <!-- this will show us all sql statements -->
+    <property name="hibernate.show_sql">false</property>
+
+    <!-- this will create the database tables for us -->
+<!--
+    <property name="hibernate.hbm2ddl.auto">create</property>
+-->
+
+	<!-- configuration pool via c3p0-->
+
+	<property name="c3p0.acquire_increment">1</property> 
+	<property name="c3p0.idle_test_period">100</property> 
+	<property name="c3p0.max_size">100</property> 
+	<property name="c3p0.max_statements">0</property> 
+	<property name="c3p0.min_size">10</property> 
+	<property name="c3p0.timeout">100</property>
+
+
+    <mapping resource="eu/netqos/pold/hibernate/mappings/Application.hbm.xml" />
+    <mapping resource="eu/netqos/pold/hibernate/mappings/User.hbm.xml" />
+    <mapping resource="eu/netqos/pold/hibernate/mappings/Ontology.hbm.xml" />
+    <mapping resource="eu/netqos/pold/hibernate/mappings/PolicyHighLevel.hbm.xml" />
+    <mapping resource="eu/netqos/pold/hibernate/mappings/Location.hbm.xml" />
+    <mapping resource="eu/netqos/pold/hibernate/mappings/PolicyIntermediateLevel.hbm.xml" />
+    <mapping resource="eu/netqos/pold/hibernate/mappings/Network.hbm.xml" />
+    <mapping resource="eu/netqos/pold/hibernate/mappings/TimeCondition.hbm.xml" />
+    <mapping resource="eu/netqos/pold/hibernate/mappings/PolicyTriple.hbm.xml" />
+    <mapping resource="eu/netqos/pold/hibernate/mappings/QosLevel.hbm.xml" />
+    <mapping resource="eu/netqos/pold/hibernate/mappings/PolicyQoSLevel.hbm.xml" />
+
+  </session-factory>
+</hibernate-configuration>

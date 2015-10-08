@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="eu.netqos.pold.data.model" default-lazy="false">
+  <class name="Location" table="locations">
+
+    <id name="id" column="id">
+      <generator class="increment"/>
+    </id>
+
+    <property name="locationName" column="location_name" type="string"></property>
+    <property name="qosClass" column="qos_class" type="string"></property>
+
+	<map name="networks" table="network_to_locations">
+	  <key column="location"/>
+	  <index column="ip_address" type="string" />
+	  <many-to-many column="network" class="Network" />
+	</map>
+
+  </class>
+</hibernate-mapping>

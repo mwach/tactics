@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="eu.netqos.pold.policy" default-lazy="false">
+  <class name="PolicyTriple" table="policy_criteria">
+
+    <id name="id" column="id">
+      <generator class="increment"/>
+    </id>
+
+	<discriminator formula="concat(policy_type, section)" type="string" />
+
+	<property name="variable" column="variable" type="string"></property>
+	<property name="operator" column="operator" type="string"></property>
+	<property name="value" column="value" type="string"></property>
+
+	<property name="logicalOperator" column="logical_operator" type="string"></property>
+
+	<property name="section" column="section" type="char"></property>
+	<property name="policyType" column="policy_type" type="char"></property>
+
+	<many-to-one name="root" column="root" class="PolicyTriple"></many-to-one>
+
+ 	<list name="elements" cascade="all">
+ 		<key column="root" />
+ 		<index column="idx" />
+ 		<one-to-many class="PolicyTriple"/>
+ 	</list>
+
+	<subclass name="eu.netqos.pold.data.model.policy.PolicyHLAction" discriminator-value="HA"></subclass>
+	<subclass name="eu.netqos.pold.data.model.policy.PolicyHLCondition" discriminator-value="HC"></subclass>
+	<subclass name="eu.netqos.pold.data.model.policy.PolicyILAction" discriminator-value="IA"></subclass>
+	<subclass name="eu.netqos.pold.data.model.policy.PolicyILCondition" discriminator-value="IC"></subclass>
+	
+  </class>
+</hibernate-mapping>

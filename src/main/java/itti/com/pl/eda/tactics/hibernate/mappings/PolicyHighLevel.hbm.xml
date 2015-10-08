@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="eu.netqos.pold.data.model" default-lazy="false">
+  <class name="PolicyHighLevel" table="policies_hl">
+
+    <id name="id" column="id">
+      <generator class="increment"/>
+    </id>
+
+	<property name="name" column="policy_name" type="string"></property>
+
+ 	<many-to-one outer-join="false" cascade="all" lazy="false" name="conditions" column="_condition" class="eu.netqos.pold.policy.PolicyTriple" />
+ 	<many-to-one outer-join="false" cascade="all" lazy="false" name="actions" column="action" class="eu.netqos.pold.policy.PolicyTriple" />
+	<many-to-one outer-join="false" cascade="all" lazy="false" name="timeConditions" column="time_condition" class="eu.netqos.pold.policy.TimeCondition" />
+
+	<list name="children" cascade="all" lazy="false">
+		<key column="hl_ref"/>
+		<index column="idx"/>
+		<one-to-many class="PolicyIntermediateLevel"/>
+	</list>
+
+	<property name="description" column="description" type="string"></property>
+	<property name="type" column="type" type="string"></property>
+
+ 	<many-to-one name="author" column="author_id" class="User" not-null="true" />
+	<many-to-one name="ontology" column="ontology_id" class="Ontology" not-null="true" />
+
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types>
+	<type 
+		name="reservation" 
+		swrl_query=
+			"Policy-hasPolicyAction(?policy, ?action) ∧ PolicyOperatorInSimplePolicyAction(?action, Set) → Policy-PolicyType(?policy, [?X])"
+		description=
+			"Reservation policies" />
+</types>

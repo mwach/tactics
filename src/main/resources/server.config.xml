@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<config>
+	<property name="port_clients" value="12345" />
+	<property name="port_operators" value="12346" />
+	<property name="port_listeners" value="12347" />
+</config>
